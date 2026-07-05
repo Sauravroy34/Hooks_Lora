@@ -18,8 +18,9 @@ def apply_lora_to_linear(model, target_layer_name, r=2, a=4):
             for param in module.parameters():
                 param.requires_grad_(False)
 
-            A = nn.Parameter(torch.zeros(output_size, r, device=weight_device, dtype=weight_dtype, requires_grad=True))
-            B = nn.Parameter(torch.randn(r, input_size, device=weight_device, dtype=weight_dtype, requires_grad=True))
+            A = nn.Parameter(torch.randn(r, input_size, device=weight_device, dtype=weight_dtype, requires_grad=True))
+            B = nn.Parameter(torch.zeros(output_size, r, device=weight_device, dtype=weight_dtype, requires_grad=True))
+
             
             module.register_parameter('A', A)
             module.register_parameter('B', B)
